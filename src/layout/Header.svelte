@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-9">
-        <h1>Street Naming Diplomacy in the EU</h1>
+        <h1>Street Naming Diplomacy</h1>
         <p class="introduction">
           Did you know that the history of European names goes back thousands of
           years and is rooted in various cultural and linguistic traditions?
