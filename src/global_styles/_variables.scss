@@ -1,0 +1,32 @@
+// Grid
+$xl: 1400px;
+$lg: 1025px;
+$md: 768px;
+$sm: 576px;
+$gutter: 30px;
+$container: $xl;
+
+// Colors
+$white: #FFFFFF;
+$text: #3A3939;
+$gray: #445165;
+$grayOpacity: 0.62;
+
+$culture: #EC8A63;
+$politics: #CFAC91;
+$military: #9E9A7B;
+$religion: #BCE1CF;
+$other: #F3D68A;
+
+// Other
+$radius: 1px;
+
+// Transitions
+@mixin easeSineIn {
+  transition-duration: 100ms;
+  transition-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
+}
+@mixin easeSineOut {
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
+}
