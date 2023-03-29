@@ -9,6 +9,7 @@ const sassPath = `${filePath}/src/`
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/eu_street_names/",
   plugins: [
     svelte({
       preprocess: preprocess({
