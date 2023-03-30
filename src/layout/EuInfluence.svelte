@@ -4,6 +4,7 @@
 
   import { colorScale } from "../data/scales";
   import { fields } from "../data/fields";
+  import ZebraLegend from "./ZebraLegend.svelte";
 
   export let data;
   export let euCountries;
@@ -87,7 +88,9 @@
         </div>
       {/each}
     </div>
-    <div class="col-12 col-md-3" />
+    <div class="col-12 col-md-3">
+      <ZebraLegend {xScale} {maxExports} {minNumCities} />
+    </div>
   </div>
 </section>
 
