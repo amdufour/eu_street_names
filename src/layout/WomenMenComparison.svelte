@@ -20,7 +20,7 @@
 
   // Chart Dimensions
   let width = 1000;
-  let height = 1200;
+  let height = 1800;
   const margin = { top: 30, rigth: 20, bottom: 20, left: 155 };
   $: innerWidth = width - margin.left - margin.rigth;
   const innerHeight = height - margin.top - margin.bottom;
@@ -79,7 +79,16 @@
                 />
               </g>
             {/if}
-            <g transform="translate({xScale(d.menNames.length) - 7}, -21.5)">
+            <g
+              transform="translate({xScale(d.menNames.length) - 7}, {d.menNames
+                .length -
+                d.womenNames.length >=
+              10
+                ? -21.5
+                : d.womenNames.length === 0
+                ? -21.5
+                : -45})"
+            >
               <path
                 d="m14.13,0v1.99h4.26l-5.13,5.13c-1.39-1.09-3.15-1.75-5.05-1.75C3.68,5.37,0,9.05,0,13.58s3.68,8.21,8.21,8.21,8.21-3.68,8.21-8.21c0-1.91-.66-3.66-1.75-5.05l5.13-5.13v4.26h1.99V0h-7.66Zm-5.92,19.8c-3.43,0-6.22-2.79-6.22-6.22s2.79-6.22,6.22-6.22,6.22,2.79,6.22,6.22-2.79,6.22-6.22,6.22Z"
               />
@@ -92,12 +101,20 @@
                 transition:fly={{ y: 8, duration: 250 }}
               >
                 {#if d.womenNames.length > 0}
-                  <text x={xScale(d.womenNames.length)} y={11}
-                    >{d.womenNames.length}</text
+                  <text
+                    x={d.menNames.length - d.womenNames.length >= 15
+                      ? xScale(d.womenNames.length)
+                      : xScale(d.womenNames.length) - 5}
+                    y={11}>{d.womenNames.length}</text
                   >
                 {/if}
-                <text x={xScale(d.menNames.length)} y={11}
-                  >{d.menNames.length}</text
+                <text
+                  x={d.menNames.length - d.womenNames.length >= 15
+                    ? xScale(d.menNames.length)
+                    : d.womenNames.length === 0
+                    ? xScale(d.menNames.length)
+                    : xScale(d.menNames.length) + 5}
+                  y={11}>{d.menNames.length}</text
                 >
               </g>
             {/if}
