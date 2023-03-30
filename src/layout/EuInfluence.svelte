@@ -1,13 +1,57 @@
 <script>
+  import { scaleLinear } from "d3-scale";
+  import { max } from "d3-array";
+
+  import { colorScale } from "../data/scales";
+  import { fields } from "../data/fields";
+
   export let data;
   export let euCountries;
+  console.log("data", data);
+
+  // Prepare data
+  const minNumCities = 5;
+  const numForeignCities =
+    "n. of foreign cities celebrating the individual with one or more streets (current country borders)";
+  const maxExportsPerCountry = [];
+  data.forEach((country) => {
+    country["exportsInMoreThanThree"] = [];
+    const allNames = country.exportedNames.sort(
+      (a, b) => +b[numForeignCities] - +a[numForeignCities]
+    );
+    fields.forEach((field) => {
+      allNames.forEach((name) => {
+        if (name.field === field.id && name[numForeignCities] >= minNumCities) {
+          country.exportsInMoreThanThree.push(name);
+        }
+      });
+    });
+
+    if (country.exportsInMoreThanThree.length > 0) {
+      maxExportsPerCountry.push(
+        max(country.exportsInMoreThanThree, (d) => +d[numForeignCities])
+      );
+    }
+  });
+  const maxExports = max(maxExportsPerCountry);
+
+  data.sort(
+    (a, b) => b.exportsInMoreThanThree.length - a.exportsInMoreThanThree.length
+  );
+  const dataToDisplay = data.filter((d) => d.exportsInMoreThanThree.length > 0);
+
+  // Dimensions
+  const rectHeight = 25;
+
+  // Scales
+  const xScale = scaleLinear().domain([0, maxExports]).range([0, 25]);
 </script>
 
 <section>
   <h2>EU countries Influencing their Neighbors</h2>
   <div class="row">
     <div class="col-12 col-md-9">
-      {#each data as d}
+      {#each dataToDisplay as d}
         <div class="country">
           <div class="label-container">
             <img
@@ -18,6 +62,18 @@
             />
             <div class="label">{d.country}</div>
           </div>
+          <div class="street-names">
+            {#each d.exportsInMoreThanThree as name}
+              <div class="street-name">
+                <span
+                  style="
+                    width: {xScale(+name[numForeignCities])}px; 
+                    background: {colorScale(name.field)};"
+                  class="rect"
+                />
+              </div>
+            {/each}
+          </div>
         </div>
       {/each}
     </div>
@@ -27,6 +83,8 @@
 
 <style lang="scss">
   .country {
+    display: flex;
+    align-items: flex-end;
     margin-top: 3.5rem;
   }
   .label-container,
@@ -38,5 +96,15 @@
     margin-bottom: 5px;
     font-size: 1.6rem;
     text-align: center;
+  }
+  .street-names {
+    display: flex;
+    margin-left: -40px;
+  }
+  .rect {
+    display: inline-block;
+    margin-right: 6px;
+    height: 55px;
+    border-radius: 1px;
   }
 </style>
