@@ -58,7 +58,7 @@
         <div class="country">
           <div class="label-container">
             <img
-              src="./src/assets/countries/{euCountries.find(
+              src="./assets/countries/{euCountries.find(
                 (c) => c.name === d.country
               ).code}.svg"
               alt="Map of {d.country}"
