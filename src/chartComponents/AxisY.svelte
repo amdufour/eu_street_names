@@ -1,13 +1,12 @@
 <script>
   export let yScale;
   export let labels;
+  export let leftMargin;
 </script>
 
 <g class="axis axis-y">
   {#each labels as label}
-    <text x={-20} y={yScale(label)} text-anchor="end" dominant-baseline="middle"
-      >{label}</text
-    >
+    <text x={-leftMargin} y={yScale(label)}>{label}</text>
   {/each}
 </g>
 

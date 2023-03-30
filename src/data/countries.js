@@ -19,7 +19,7 @@ export const euCountries = [
   { name: "Finland", code: "FI" },
   { name: "Slovenia", code: "SI" },
   { name: "Portugal", code: "PT" },
-  { name: "Republic of Cyprus", code: "" },
+  { name: "Republic of Cyprus", code: "SK" },
   { name: "Slovakia", code: "CY" },
   { name: "Lithuania", code: "LT" },
   { name: "Luxembourg", code: "LU" },

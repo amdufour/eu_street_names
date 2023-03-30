@@ -20,7 +20,7 @@
   // Chart Dimensions
   let width = 1000;
   let height = 1200;
-  const margin = { top: 30, rigth: 20, bottom: 20, left: 170 };
+  const margin = { top: 30, rigth: 20, bottom: 20, left: 155 };
   $: innerWidth = width - margin.left - margin.rigth;
   const innerHeight = height - margin.top - margin.bottom;
 
@@ -62,7 +62,7 @@
           {xScale}
           position="bottom"
         />
-        <AxisY {yScale} labels={countries} />
+        <AxisY {yScale} labels={countries} leftMargin={margin.left} />
         {#each data as d}
           <g transform="translate(0, {yScale(d.country)})">
             <line
