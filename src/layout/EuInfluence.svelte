@@ -114,7 +114,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-left: -40px;
-    margin-bottom: -27px;
+    margin-bottom: -12px;
   }
   .street-name {
     display: flex;
