@@ -8,14 +8,15 @@
 
   export let data;
 
-  // Calculations
-  data.forEach((d) => {
+  // Prepare data
+  const dumbbellData = [...data];
+  dumbbellData.forEach((d) => {
     d["womenNames"] = d.exportedNames.filter(
       (name) => name.gender === "female"
     );
     d["menNames"] = d.exportedNames.filter((name) => name.gender === "male");
   });
-  data.sort((a, b) => b.womenNames.length - a.womenNames.length);
+  dumbbellData.sort((a, b) => b.womenNames.length - a.womenNames.length);
 
   // Chart Dimensions
   let width = 1000;
@@ -25,8 +26,8 @@
   const innerHeight = height - margin.top - margin.bottom;
 
   // Scales
-  const maxNames = max(data, (d) => d.menNames.length);
-  const countries = data.map((d) => d.country);
+  const maxNames = max(dumbbellData, (d) => d.menNames.length);
+  const countries = dumbbellData.map((d) => d.country);
   $: xScale = scaleLinear().domain([0, maxNames]).range([0, innerWidth]);
   const yScale = scalePoint()
     .domain(countries)
@@ -63,7 +64,7 @@
           position="bottom"
         />
         <AxisY {yScale} labels={countries} leftMargin={margin.left} />
-        {#each data as d}
+        {#each dumbbellData as d}
           <g transform="translate(0, {yScale(d.country)})">
             <line
               x1={xScale(d.womenNames.length)}

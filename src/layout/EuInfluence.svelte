@@ -7,14 +7,14 @@
 
   export let data;
   export let euCountries;
-  console.log("data", data);
 
   // Prepare data
+  const zebraData = [...data];
   const minNumCities = 3;
   const numForeignCities =
     "n. of foreign cities celebrating the individual with one or more streets (current country borders)";
   const maxExportsPerCountry = [];
-  data.forEach((country) => {
+  zebraData.forEach((country) => {
     country["exportsInMoreThanThree"] = [];
     const allNames = country.exportedNames.sort(
       (a, b) => +b[numForeignCities] - +a[numForeignCities]
@@ -35,10 +35,12 @@
   });
   const maxExports = max(maxExportsPerCountry);
 
-  data.sort(
+  zebraData.sort(
     (a, b) => b.exportsInMoreThanThree.length - a.exportsInMoreThanThree.length
   );
-  const dataToDisplay = data.filter((d) => d.exportsInMoreThanThree.length > 0);
+  const dataToDisplay = zebraData.filter(
+    (d) => d.exportsInMoreThanThree.length > 0
+  );
 
   // Dimensions
   const rectHeight = 25;
