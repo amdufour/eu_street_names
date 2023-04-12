@@ -2,6 +2,7 @@
   import { scaleLinear } from "d3-scale";
 
   export let foreignNames;
+  export let selectedRegion = null;
 
   const foreignRegions = [
     { id: "Europe and Central Asia (non EU)" },
@@ -22,13 +23,23 @@
 
   $: windowWidth = 1400;
   $: euBarWidth = (windowWidth - 1400) / 2 - 80 + (0.4167 * 1400 - 15);
+
+  const handleBarClick = (region) => {
+    selectedRegion = region;
+  };
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
 
 <div class="bar-chart-container">
+  <div class="instructions">Select a region</div>
   {#each foreignRegions as region, i}
-    <div class="bar">
+    <div
+      class="bar"
+      class:selected={selectedRegion !== null &&
+        selectedRegion.id === region.id}
+      on:click={() => handleBarClick(region)}
+    >
       <div
         class="rect"
         style="width: {i === 0 && windowWidth > 1400
@@ -55,8 +66,24 @@
 </div>
 
 <style lang="scss">
+  .instructions {
+    margin-left: 20px;
+    margin-bottom: 1.5rem;
+    font-family: $fontSecondary;
+    font-weight: 500;
+    font-size: 2.2rem;
+  }
   .bar {
     position: relative;
+    cursor: pointer;
+    &.selected {
+      .label-container .label {
+        &::after {
+          width: 100%;
+          @include easeSineOut;
+        }
+      }
+    }
   }
   .rect {
     margin-bottom: 1.7rem;
@@ -78,7 +105,20 @@
     left: 20px;
     height: 100%;
     .label {
+      position: relative;
       margin-top: 1px;
+      line-height: 1.2;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: $text;
+        transition-property: width;
+        @include easeSineIn;
+      }
     }
   }
 </style>
