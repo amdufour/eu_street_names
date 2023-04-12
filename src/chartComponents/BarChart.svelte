@@ -1,0 +1,84 @@
+<script>
+  import { scaleLinear } from "d3-scale";
+
+  export let foreignNames;
+
+  const foreignRegions = [
+    { id: "Europe and Central Asia (non EU)" },
+    { id: "Middle East and North Africa" },
+    { id: "North America" },
+    { id: "Latin America and Caribbean" },
+    { id: "Sub-Saharan Africa" },
+    { id: "East Asia and Pacific" },
+    { id: "South Asia" },
+  ];
+
+  foreignRegions.forEach((region) => {
+    region["names"] = foreignNames.filter((name) => name.region === region.id);
+  });
+  console.log("foreignRegions", foreignRegions);
+
+  const barWidthScale = scaleLinear().domain([0, 250]).range([0, 540]);
+
+  $: windowWidth = 1400;
+  $: euBarWidth = (windowWidth - 1400) / 2 - 80 + (0.4167 * 1400 - 15);
+</script>
+
+<svelte:window bind:innerWidth={windowWidth} />
+
+<div class="bar-chart-container">
+  {#each foreignRegions as region, i}
+    <div class="bar">
+      <div
+        class="rect"
+        style="width: {i === 0 && windowWidth > 1400
+          ? euBarWidth
+          : barWidthScale(region.names.length)}px"
+      />
+      {#if i === 0 && windowWidth > 1400}
+        <svg
+          class="bar-extension"
+          viewBox="0 0 47.47 57"
+          style="left: {euBarWidth - 6}px"
+        >
+          <path
+            d="m45.79,25.47c2.25,1.39,2.25,4.66,0,6.05L5.43,56.46C3.06,57.93,0,56.22,0,53.44V3.56C0,.78,3.06-.93,5.43.54l40.36,24.94Z"
+            style="fill: #e0e4ea;"
+          />
+        </svg>
+      {/if}
+      <div class="label-container">
+        <div class="label">{region.id} ({region.names.length})</div>
+      </div>
+    </div>
+  {/each}
+</div>
+
+<style lang="scss">
+  .bar {
+    position: relative;
+  }
+  .rect {
+    margin-bottom: 1.7rem;
+    height: 50px;
+    background-color: $grayPale;
+    border-radius: 5px;
+  }
+  .bar-extension {
+    position: absolute;
+    top: 0;
+    height: 50px;
+    width: auto;
+  }
+  .label-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 100%;
+    .label {
+      margin-top: 1px;
+    }
+  }
+</style>
