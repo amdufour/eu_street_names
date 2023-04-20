@@ -77,11 +77,13 @@
     position: relative;
     cursor: pointer;
     &.selected {
-      .label-container .label {
-        &::after {
-          width: 100%;
-          @include easeSineOut;
-        }
+      .rect {
+        background-color: rgba($selection, 0.3);
+        @include easeSineOut;
+      }
+      .bar-extension path {
+        fill: rgba($selection, 0.3) !important;
+        @include easeSineOut;
       }
     }
   }
@@ -90,12 +92,17 @@
     height: 50px;
     background-color: $grayPale;
     border-radius: 5px;
+    transition-property: background-color;
+    @include easeSineIn;
   }
   .bar-extension {
     position: absolute;
     top: 0;
     height: 50px;
     width: auto;
+    path {
+      @include easeSineIn;
+    }
   }
   .label-container {
     display: flex;
@@ -108,17 +115,6 @@
       position: relative;
       margin-top: 1px;
       line-height: 1.2;
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 1px;
-        background-color: $text;
-        transition-property: width;
-        @include easeSineIn;
-      }
     }
   }
 </style>

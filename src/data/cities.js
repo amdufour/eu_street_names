@@ -1,4 +1,4 @@
-export const cities = [
+export const citiesInfo = [
   { city: "Kyiv", cityEN: "Kyiv", country: "Ukraine", countryCode: "UA", latitude: 50.450001, longitude: 30.523333 },
   { city: "København", cityEN: "Copenhagen", country: "Denmark", countryCode: "DK", latitude: 55.676098, longitude: 12.568337 },
   { city: "Stockholm", cityEN: "Stockholm", country: "Sweden", countryCode: "SE", latitude: 59.334591, longitude: 18.063240 },
