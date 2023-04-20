@@ -4,6 +4,7 @@
   import { scaleRadial } from "d3-scale";
   import countries from "../data/eu.json";
   import { citiesInfo } from "../data/cities";
+  import RadiusLegend from "./RadiusLegend.svelte";
 
   export let selectedRegion = null;
   export let maxNamesPerCity;
@@ -73,15 +74,14 @@
         transition:fade
       />
     {/each}
+    <RadiusLegend {radiusScale} {height} />
   {/if}
 </svg>
 
 <style lang="scss">
   circle {
     fill: $selection;
-    fill-opacity: 0.3;
-    stroke: $selection;
-    stroke-width: 1.5;
+    fill-opacity: 0.4;
     transition: r 350ms ease;
   }
 </style>

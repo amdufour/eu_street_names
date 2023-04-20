@@ -78,11 +78,11 @@
     cursor: pointer;
     &.selected {
       .rect {
-        background-color: rgba($selection, 0.3);
+        background-color: rgba($selection, 0.4);
         @include easeSineOut;
       }
       .bar-extension path {
-        fill: rgba($selection, 0.3) !important;
+        fill: rgba($selection, 0.4) !important;
         @include easeSineOut;
       }
     }
