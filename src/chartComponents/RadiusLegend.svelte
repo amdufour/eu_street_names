@@ -12,8 +12,12 @@
 <g
   class="radius-legend"
   transition:fade
-  transform="translate(2, {height - 2 * maxRadius - 2})"
+  transform="translate(2, {height - 5 * maxRadius})"
 >
+  <text class="label" y={-45}>
+    <tspan>Number of street names</tspan>
+    <tspan x={0} dy={20}>from the selected region</tspan></text
+  >
   <g class="legend-circles">
     {#each numbers as number}
       <circle
@@ -28,7 +32,7 @@
       <line
         x1={maxRadius}
         y1={2 * (maxRadius - radiusScale(number))}
-        x2={maxRadius + 80}
+        x2={maxRadius + 65}
         y2={2 * (maxRadius - radiusScale(number))}
         stroke-linecap="round"
         stroke-dasharray="6 4"
@@ -38,7 +42,7 @@
   <g class="legend-labels">
     {#each numbers as number}
       <text
-        x={maxRadius + 85}
+        x={maxRadius + 70}
         y={2 * (maxRadius - radiusScale(number))}
         dominant-baseline="middle">{number}</text
       >
@@ -55,6 +59,9 @@
     stroke: $text;
   }
   text {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    &.label {
+      font-size: 1.5rem;
+    }
   }
 </style>
