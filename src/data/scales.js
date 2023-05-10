@@ -1,5 +1,5 @@
 import { scaleOrdinal } from "d3-scale";
-import { fields } from "./fields";
+import fields from "./fields.json";
 
 export const colorScale = scaleOrdinal()
   .domain(fields.map(field => field.id))

@@ -1,5 +1,5 @@
 <script>
-  import { foreignNames } from "../data/foreign-names";
+  import foreignNames from "../data/foreign-names.json";
   import Map from "../chartComponents/Map.svelte";
   import LeftColumnIntro from "../texts/LeftColumnIntro.svelte";
   import BarChart from "../chartComponents/BarChart.svelte";

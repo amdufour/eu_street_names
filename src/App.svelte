@@ -1,6 +1,6 @@
 <script>
-  import { exportsPerEuCountry } from "./data/exportsPerEuCountry";
-  import { euCountries } from "./data/countries";
+  import exportsPerEuCountry from "./data/exportsPerEuCountry.json";
+  import euCountries from "./data/countries.json";
   import Header from "./layout/Header.svelte";
   import Footer from "./layout/Footer.svelte";
   import WomenMenComparison from "./layout/WomenMenComparison.svelte";

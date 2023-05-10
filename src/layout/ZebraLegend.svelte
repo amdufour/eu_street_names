@@ -1,6 +1,6 @@
 <script>
   import { range } from "d3-array";
-  import { fields } from "../data/fields";
+  import fields from "../data/fields.json";
 
   export let xScale;
   export let minNumCities;

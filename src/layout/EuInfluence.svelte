@@ -3,7 +3,7 @@
   import { max } from "d3-array";
 
   import { colorScale } from "../data/scales";
-  import { fields } from "../data/fields";
+  import fields from "../data/fields.json";
   import ZebraLegend from "./ZebraLegend.svelte";
 
   export let data;

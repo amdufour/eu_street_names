@@ -3,7 +3,7 @@
   import { geoPath, geoMercator } from "d3-geo";
   import { scaleRadial } from "d3-scale";
   import countries from "../data/eu.json";
-  import { citiesInfo } from "../data/cities";
+  import citiesInfo from "../data/cities.json";
   import RadiusLegend from "./RadiusLegend.svelte";
 
   export let selectedRegion = null;
