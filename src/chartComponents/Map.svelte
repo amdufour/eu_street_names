@@ -9,6 +9,7 @@
 
   export let selectedRegion = null;
   export let maxNamesPerCity;
+  export let namesListIsInViewport;
 
   const width = 800;
   const height = 800;
@@ -34,8 +35,6 @@
   let cities = [];
   $: tooltipIsVisible = false;
   $: if (selectedRegion !== null) {
-    console.log("selectedRegion", selectedRegion);
-
     cities = [];
     selectedRegion.names.forEach((name) => {
       const celebratingCities =
@@ -53,7 +52,6 @@
         }
       });
     });
-    console.log("cities", cities);
 
     cities.forEach((city) => {
       const relatedCity = citiesInfo.find((c) => c.city === city.id);
@@ -78,7 +76,7 @@
   };
 
   const handleMouseLeave = () => {
-    // tooltipIsVisible = false;
+    tooltipIsVisible = false;
   };
 </script>
 
@@ -90,7 +88,7 @@
       stroke="#3A3939"
       stroke-width={0.5}
     />
-    {#if selectedRegion !== null}
+    {#if selectedRegion !== null && !namesListIsInViewport}
       {#each cities as city}
         <circle
           cx={projection([city.longitude, city.latitude])[0]}

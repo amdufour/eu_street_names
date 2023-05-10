@@ -3,6 +3,7 @@
 
   export let foreignNames;
   export let selectedRegion = null;
+  export let namesListIsInViewport;
 
   const foreignRegions = [
     { id: "Europe and Central Asia (non EU)" },
@@ -37,7 +38,8 @@
     <div
       class="bar"
       class:selected={selectedRegion !== null &&
-        selectedRegion.id === region.id}
+        selectedRegion.id === region.id &&
+        !namesListIsInViewport}
       on:click={() => handleBarClick(region)}
     >
       <div
