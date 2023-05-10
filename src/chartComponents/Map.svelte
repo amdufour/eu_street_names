@@ -78,7 +78,7 @@
   };
 
   const handleMouseLeave = () => {
-    tooltipIsVisible = false;
+    // tooltipIsVisible = false;
   };
 </script>
 
@@ -111,10 +111,16 @@
       in:fly={{ y: 10, duration: 200, delay: 200 }}
       out:fade
     >
-      <div class="city">{tooltipMeta.city}</div>
+      <div class="city">
+        {tooltipMeta.city}, {tooltipMeta.names.length} street name{tooltipMeta
+          .names.length > 1
+          ? "s"
+          : ""} originating from
+        {selectedRegion.id}
+      </div>
       <ul>
         {#each tooltipMeta.names as name}
-          <li>
+          <li class:female={name.gender === "female"}>
             <span class="name-label">{name.name}: </span>
             <span class="name-label">{name["description (from Wikidata)"]}</span
             >
@@ -136,7 +142,8 @@
     width: 400px;
     position: absolute;
     z-index: 10;
-    padding: 20px 20px 5px;
+    padding: 20px 25px 5px;
+    line-height: 1.2;
     background-color: #fff;
     border: 1px solid $text;
     border-radius: 3px;
@@ -155,19 +162,36 @@
       );
     }
     .city {
+      margin-left: -2px;
       font-size: 1.8rem;
     }
     ul {
       position: relative;
       max-height: 280px;
       margin-bottom: 15px;
+      margin-left: -20px;
+      padding-left: 20px;
       overflow-y: scroll;
     }
     li {
       margin: 15px 0;
       font-family: $fontSecondary;
       font-size: 1.6rem;
-      line-height: 1.2;
+      &.female {
+        position: relative;
+        &:before {
+          content: "";
+          position: absolute;
+          left: -17px;
+          top: 0;
+          width: 15px;
+          height: 18px;
+          background-image: url("../assets/female_sm.svg");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+        }
+      }
     }
   }
 </style>
