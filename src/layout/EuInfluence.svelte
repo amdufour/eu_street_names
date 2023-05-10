@@ -102,7 +102,7 @@
   }
   .label-container,
   .label-container img {
-    width: 27rem;
+    width: 22rem;
   }
   .label {
     width: 23rem;
