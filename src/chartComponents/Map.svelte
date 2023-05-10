@@ -8,6 +8,7 @@
   import RadiusLegend from "./RadiusLegend.svelte";
 
   export let selectedRegion = null;
+  export let citiesToDisplay = null;
   export let maxNamesPerCity;
   export let namesListIsInViewport;
 
@@ -59,6 +60,21 @@
       city["latitude"] = relatedCity.latitude;
       city["longitude"] = relatedCity.longitude;
     });
+    console.log(cities);
+  }
+
+  $: if (citiesToDisplay !== null) {
+    console.log(citiesToDisplay);
+    cities = [];
+    citiesToDisplay.forEach((city) => {
+      const relatedCity = citiesInfo.find((c) => c.city === city);
+      cities.push({
+        id: city,
+        names: [{}],
+        latitude: relatedCity.latitude,
+        longitude: relatedCity.longitude,
+      });
+    });
   }
 
   const tooltipMeta = {
@@ -100,6 +116,18 @@
         />
       {/each}
       <RadiusLegend {radiusScale} {height} />
+    {/if}
+    {#if citiesToDisplay !== null && namesListIsInViewport}
+      {#each cities as city}
+        <circle
+          cx={projection([city.longitude, city.latitude])[0]}
+          cy={projection([city.longitude, city.latitude])[1]}
+          r={radiusScale(city.names.length)}
+          transition:fade
+          on:mouseenter={(e) => handleMouseEnter(e, city)}
+          on:focus={(e) => handleMouseEnter(e, city)}
+        />
+      {/each}
     {/if}
   </svg>
   {#if tooltipIsVisible}

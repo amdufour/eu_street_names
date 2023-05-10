@@ -1,11 +1,12 @@
 <script>
-  import { fade, fly } from "svelte/transition";
   import viewport from "../helper/useViewportAction";
   import cities from "../data/cities.json";
   export let foreignNames;
   export let namesListIsInViewport;
+  export let citiesToDisplay;
 
   $: namesToDisplay = foreignNames;
+  $: citiesToDisplay = [];
   console.log(foreignNames);
   let currentScroll = 0;
   let isScrollUp = true;
@@ -23,17 +24,27 @@
     isScrollUp = newScroll > currentScroll ? true : false;
     currentScroll = newScroll;
   };
+  const updateCities = (cities) => {
+    citiesToDisplay = cities.split("|");
+  };
   const handleNameChange = (name, isLeave) => {
     if (isScrollUp && isLeave) {
-      console.log("up leave");
-
       const currentIndex = namesToDisplay.findIndex(
         (n) => n.name === name.name && n["Wikidata ID"] === name["Wikidata ID"]
       );
       indexToHighlight = currentIndex + 1;
+      updateCities(
+        name[
+          "list of cities celebrating the individual with one or more streets"
+        ]
+      );
     } else if (!isScrollUp && !isLeave) {
-      console.log("down leave");
       indexToHighlight -= 1;
+      updateCities(
+        name[
+          "list of cities celebrating the individual with one or more streets"
+        ]
+      );
     }
   };
 </script>
@@ -69,12 +80,7 @@
                     : ""})</span
                 >
               </div>
-              <div
-                class="meta-info"
-                class:visible={indexToHighlight === i}
-                in:fly={{ y: 10, duration: 200, delay: 200 }}
-                out:fly={{ y: -10, duration: 200, delay: 200 }}
-              >
+              <div class="meta-info" class:visible={indexToHighlight === i}>
                 <div class="description">
                   <span>{name["description (from Wikidata)"]}</span>
                   {#if !name["description (from Wikidata)"].includes(name["Year of birth (from Wikidata)"]) && name["Year of birth (from Wikidata)"] !== "NA"}
@@ -151,6 +157,7 @@
   }
   li {
     margin: 15rem 0;
+    line-height: 1.4;
     background-color: #fff;
     border-radius: 5px;
     transition: background-color 200ms ease;
@@ -183,7 +190,6 @@
   }
   .meta-info {
     font-size: 1.6rem;
-    line-height: 1.4;
     div {
       margin: 15px 0;
     }

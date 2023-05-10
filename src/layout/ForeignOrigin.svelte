@@ -7,6 +7,7 @@
   import { max } from "d3-array";
 
   $: selectedRegion = null;
+  $: citiesToDisplay = null;
 
   // Extract max names per city
   const cities = [];
@@ -37,7 +38,12 @@
     <div class="col-12 col-md-7">
       <div class="sticky-container">
         <div class="sticky">
-          <Map {selectedRegion} {maxNamesPerCity} {namesListIsInViewport} />
+          <Map
+            {selectedRegion}
+            {citiesToDisplay}
+            {maxNamesPerCity}
+            {namesListIsInViewport}
+          />
         </div>
       </div>
     </div>
@@ -45,7 +51,11 @@
       <div class="left-col-container">
         <LeftColumnIntro />
         <BarChart {foreignNames} {namesListIsInViewport} bind:selectedRegion />
-        <NamesList {foreignNames} bind:namesListIsInViewport />
+        <NamesList
+          {foreignNames}
+          bind:namesListIsInViewport
+          bind:citiesToDisplay
+        />
       </div>
     </div>
   </div>
