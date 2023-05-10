@@ -1,8 +1,9 @@
 <script>
   import { fade } from "svelte/transition";
+  import * as topojson from "topojson-client";
   import { geoPath, geoMercator } from "d3-geo";
   import { scaleRadial } from "d3-scale";
-  import countries from "../data/eu.json";
+  import countries from "../data/eu-topojson.json";
   import citiesInfo from "../data/cities.json";
   import RadiusLegend from "./RadiusLegend.svelte";
 
@@ -12,10 +13,16 @@
   const width = 800;
   const height = 800;
 
+  // Convert TopoJSON to GeoJSON
+  let countriesMap = topojson.feature(countries, countries.objects.eu).features;
+
+  // Extract borders
+  let borders = topojson.mesh(countries, countries.objects.eu);
+
   // Define projection
   const projection = geoMercator()
-    .scale(0.75 * width)
-    .translate([width / 4, 1.35 * height]);
+    .scale(0.7 * width)
+    .translate([width / 4 + 50, 1.28 * height]);
 
   // Initialize the path generator
   const geoPathGenerator = geoPath().projection(projection);
@@ -57,14 +64,12 @@
 </script>
 
 <svg {width} {height}>
-  {#each countries.features as country}
-    <path
-      d={geoPathGenerator(country)}
-      fill="none"
-      stroke="#3A3939"
-      stroke-width={0.5}
-    />
-  {/each}
+  <path
+    d={geoPathGenerator(borders)}
+    fill="none"
+    stroke="#3A3939"
+    stroke-width={0.5}
+  />
   {#if selectedRegion !== null}
     {#each cities as city}
       <circle
