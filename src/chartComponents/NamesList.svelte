@@ -6,7 +6,6 @@
   export let citiesToDisplay;
 
   $: namesToDisplay = foreignNames;
-  $: citiesToDisplay = [];
   console.log(foreignNames);
   let currentScroll = 0;
   let isScrollUp = true;
@@ -28,23 +27,26 @@
     citiesToDisplay = cities.split("|");
   };
   const handleNameChange = (name, isLeave) => {
-    if (isScrollUp && isLeave) {
-      const currentIndex = namesToDisplay.findIndex(
-        (n) => n.name === name.name && n["Wikidata ID"] === name["Wikidata ID"]
-      );
-      indexToHighlight = currentIndex + 1;
-      updateCities(
-        name[
-          "list of cities celebrating the individual with one or more streets"
-        ]
-      );
-    } else if (!isScrollUp && !isLeave) {
-      indexToHighlight -= 1;
-      updateCities(
-        name[
-          "list of cities celebrating the individual with one or more streets"
-        ]
-      );
+    if (namesListIsInViewport) {
+      if (isScrollUp && isLeave) {
+        const currentIndex = namesToDisplay.findIndex(
+          (n) =>
+            n.name === name.name && n["Wikidata ID"] === name["Wikidata ID"]
+        );
+        indexToHighlight = currentIndex + 1;
+        updateCities(
+          name[
+            "list of cities celebrating the individual with one or more streets"
+          ]
+        );
+      } else if (!isScrollUp && !isLeave) {
+        indexToHighlight -= 1;
+        updateCities(
+          name[
+            "list of cities celebrating the individual with one or more streets"
+          ]
+        );
+      }
     }
   };
 </script>
