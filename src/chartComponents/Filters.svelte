@@ -7,15 +7,18 @@
   export let onReset;
 
   const handleGenderSelection = (gender) => {
-    console.log(selectedFilters);
     if (selectedFilters.gender !== gender) {
       onSelectFilter("gender", gender);
     }
   };
   const handleFieldSelection = (field) => {
-    console.log(field);
     if (selectedFilters.field !== field) {
       onSelectFilter("field", field);
+    }
+  };
+  const handleRegionSelection = (region) => {
+    if (selectedFilters.region !== region) {
+      onSelectFilter("region", region);
     }
   };
 
@@ -66,7 +69,9 @@
     >
     <Dropdown>
       {#each regions as region}
-        <DropdownItem>{region.id}</DropdownItem>
+        <DropdownItem on:click={() => handleRegionSelection(region.id)}
+          >{region.id}</DropdownItem
+        >
       {/each}
     </Dropdown>
   </div>

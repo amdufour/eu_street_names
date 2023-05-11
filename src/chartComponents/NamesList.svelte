@@ -59,27 +59,25 @@
   const filterNames = (filter, selection) => {
     console.log(filter, selection);
     selectedFilters[filter] = selection;
-    console.log(selectedFilters);
 
     let filteredList = JSON.parse(JSON.stringify(foreignNames));
     console.log(filteredList);
     if (selectedFilters.gender !== "") {
-      filteredList = JSON.parse(
-        JSON.stringify(filteredList.filter((name) => name.gender === selection))
+      filteredList = filteredList.filter(
+        (name) => name.gender === selectedFilters.gender
       );
-      console.log(filteredList);
     }
     if (selectedFilters.field !== "") {
-      filteredList = JSON.parse(
-        JSON.stringify(
-          filteredList.filter(
-            (name) =>
-              name["field of activity"].split("; ")[0] ===
-              selection.toLowerCase()
-          )
-        )
+      filteredList = filteredList.filter(
+        (name) =>
+          name["field of activity"].split("; ")[0] ===
+          selectedFilters.field.toLowerCase()
       );
-      console.log(filteredList);
+    }
+    if (selectedFilters.region !== "") {
+      filteredList = filteredList.filter(
+        (name) => name.region === selectedFilters.region
+      );
     }
     namesToDisplay = filteredList;
   };
@@ -143,20 +141,6 @@
                     {name["country of citizenship (from Wikidata)"]}
                   </div>
                 {/if}
-                <div class="cities">
-                  Cities celebrating this individual:
-                  {#each name["list of cities celebrating the individual with one or more streets"].split("|") as city, j}
-                    {`${cities.find((c) => c.city === city).cityEN}${
-                      j ===
-                      name[
-                        "list of cities celebrating the individual with one or more streets"
-                      ].split("|").length -
-                        1
-                        ? ""
-                        : ", "
-                    }`}
-                  {/each}
-                </div>
               </div>
             </div>
           </div>

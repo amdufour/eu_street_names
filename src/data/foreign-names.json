@@ -2471,51 +2471,6 @@
         ]
     },
     {
-        "name": "Bartholomew the Apostle",
-        "Wikidata ID": "Q43982",
-        "description (from Wikidata)": "Christian Apostle",
-        "occupation (from Wikidata)": "presbyter",
-        "field of activity": "religion",
-        "Year of birth (from Wikidata)": "-100",
-        "Year of death (from Wikidata)": "100",
-        "gender": "male",
-        "country of citizenship (from Wikidata)": "NA",
-        "latitude of the place of birth": "32.745",
-        "longitude of the place of birth": "35.33833333",
-        "country code of the current country hosting the place of birth": "IL",
-        "current country hosting the place of birth": "Israel",
-        "NUTS2 code of the current region hosting the place of birth": "NA",
-        "current NUTS2 region hosting the place of birth": "NA",
-        "n. of streets dedicated to the individual": "9",
-        "n. of cities celebrating the individual with one or more streets": "5",
-        "n. of foreign cities celebrating the individual with one or more streets (current country borders)": "5",
-        "list of cities celebrating the individual with one or more streets": "Wien|Barcelona|Lyon|Genova|Gdańsk",
-        "citizenship": "Israel",
-        "region": "Middle East and North Africa",
-        "countries": [
-            {
-                "id": "Austria",
-                "count": 1
-            },
-            {
-                "id": "Spain",
-                "count": 1
-            },
-            {
-                "id": "France",
-                "count": 1
-            },
-            {
-                "id": "Italy",
-                "count": 1
-            },
-            {
-                "id": "Poland",
-                "count": 1
-            }
-        ]
-    },
-    {
         "name": "Basil of Caesarea",
         "Wikidata ID": "Q44258",
         "description (from Wikidata)": "Christian Saint",
