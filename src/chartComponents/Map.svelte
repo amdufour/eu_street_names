@@ -91,7 +91,7 @@
   };
 
   const handleMouseLeave = () => {
-    // tooltipIsVisible = false;
+    tooltipIsVisible = false;
   };
 </script>
 
