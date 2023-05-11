@@ -68,7 +68,7 @@
       const relatedCity = citiesInfo.find((c) => c.city === city);
       cities.push({
         id: city,
-        names: [{}],
+        names: [{}, {}],
         latitude: relatedCity.latitude,
         longitude: relatedCity.longitude,
       });
@@ -158,7 +158,8 @@
 <style lang="scss">
   circle {
     fill: $selection;
-    fill-opacity: 0.4;
+    fill-opacity: 1;
+    stroke: $white;
     transition: r 350ms ease;
   }
   .map-tooltip {

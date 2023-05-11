@@ -5,7 +5,7 @@
   export let height;
 
   const max = 400;
-  const numbers = [20, 100, max];
+  const numbers = [max, 100, 20];
   const maxRadius = radiusScale(max);
 </script>
 
@@ -53,7 +53,7 @@
 <style lang="scss">
   circle {
     fill: $selection;
-    fill-opacity: 0.4;
+    stroke: $white;
   }
   line {
     stroke: $text;
