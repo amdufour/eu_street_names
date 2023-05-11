@@ -59,19 +59,36 @@
   const filterNames = (filter, selection) => {
     console.log(filter, selection);
     selectedFilters[filter] = selection;
-    switch (true) {
-      case filter === "gender":
-        namesToDisplay = foreignNames.filter(
-          (name) => name[filter] === selection
-        );
-        break;
-      case filter === "field":
-        namesToDisplay = foreignNames.filter(
-          (name) =>
-            name["field of activity"].split("; ")[0] === selection.toLowerCase()
-        );
-        break;
+    console.log(selectedFilters);
+
+    let filteredList = JSON.parse(JSON.stringify(foreignNames));
+    console.log(filteredList);
+    if (selectedFilters.gender !== "") {
+      filteredList = JSON.parse(
+        JSON.stringify(filteredList.filter((name) => name.gender === selection))
+      );
+      console.log(filteredList);
     }
+    if (selectedFilters.field !== "") {
+      filteredList = JSON.parse(
+        JSON.stringify(
+          filteredList.filter(
+            (name) =>
+              name["field of activity"].split("; ")[0] ===
+              selection.toLowerCase()
+          )
+        )
+      );
+      console.log(filteredList);
+    }
+    namesToDisplay = filteredList;
+  };
+
+  const resetFilters = () => {
+    selectedFilters.gender = "";
+    selectedFilters.field = "";
+    selectedFilters.region = "";
+    namesToDisplay = foreignNames;
   };
 </script>
 
@@ -80,6 +97,7 @@
 <Filters
   {selectedFilters}
   onSelectFilter={(gender, selection) => filterNames(gender, selection)}
+  onReset={resetFilters}
 />
 <div class="number">
   ({namesToDisplay.length} name{namesToDisplay.length > 1 ? "s" : ""})

@@ -4,6 +4,7 @@
   import regions from "../data/regions.json";
   export let selectedFilters;
   export let onSelectFilter;
+  export let onReset;
 
   const handleGenderSelection = (gender) => {
     console.log(selectedFilters);
@@ -16,6 +17,10 @@
     if (selectedFilters.field !== field) {
       onSelectFilter("field", field);
     }
+  };
+
+  const handleReset = () => {
+    onReset();
   };
 </script>
 
@@ -65,10 +70,27 @@
       {/each}
     </Dropdown>
   </div>
+  {#if selectedFilters.gender !== "" || selectedFilters.field !== "" || selectedFilters.region !== ""}
+    <div class="reset" on:click={handleReset}>
+      <svg
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-x"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+        />
+      </svg>
+      <span>Reset filters</span>
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">
   .filters {
+    position: relative;
     margin-bottom: 3rem;
     padding-left: 2px;
     font-size: 1.6rem;
@@ -108,5 +130,16 @@
   }
   button.filter-men {
     padding-left: 7px;
+  }
+  .reset {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.4rem;
+    cursor: pointer;
+    svg {
+      position: relative;
+      top: 3px;
+    }
   }
 </style>
