@@ -8,16 +8,27 @@
   border: none;
   cursor: pointer;
 }
-.filter-section > button {
-  padding-top: 3px;
+.filter-section.field,
+.filter-section.region {
+  display: inline-block;
+}
+.filter-section.field > button,
+.filter-section.region > button {
+  position: relative;
+  width: 240px;
+  height: 36px;
+  margin-right: 10px;
+  padding-top: 6px;
   padding-bottom: 6px;
+  padding-right: 30px;
   border: 1px solid $text;
   border-radius: 5px;
   text-align: left;
   line-height: 1.1;
   svg {
-    position: relative;
-    top: 2px;
+    position: absolute;
+    top: 4px;
+    right: 10px;
   }
 }
 .filter-section{

@@ -28,3 +28,9 @@ select,
 button {
 	font: inherit;
 }
+
+.instructions {
+  font-family: $fontSecondary;
+  font-weight: 500;
+  font-size: 2rem;
+}

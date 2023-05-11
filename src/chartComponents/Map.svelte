@@ -60,11 +60,9 @@
       city["latitude"] = relatedCity.latitude;
       city["longitude"] = relatedCity.longitude;
     });
-    console.log(cities);
   }
 
   $: if (citiesToDisplay !== null) {
-    console.log(citiesToDisplay);
     cities = [];
     citiesToDisplay.forEach((city) => {
       const relatedCity = citiesInfo.find((c) => c.city === city);

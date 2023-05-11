@@ -58,12 +58,25 @@
   };
   const filterNames = (filter, selection) => {
     console.log(filter, selection);
-    selectedFilters.gender = selection;
-    namesToDisplay = foreignNames.filter((name) => name[filter] === selection);
+    selectedFilters[filter] = selection;
+    switch (true) {
+      case filter === "gender":
+        namesToDisplay = foreignNames.filter(
+          (name) => name[filter] === selection
+        );
+        break;
+      case filter === "field":
+        namesToDisplay = foreignNames.filter(
+          (name) =>
+            name["field of activity"].split("; ")[0] === selection.toLowerCase()
+        );
+        break;
+    }
   };
 </script>
 
 <h3>Most common foreign names</h3>
+<p>Below are the names used for five streets or more.</p>
 <Filters
   {selectedFilters}
   onSelectFilter={(gender, selection) => filterNames(gender, selection)}
@@ -141,6 +154,9 @@
 </div>
 
 <style lang="scss">
+  p {
+    margin-top: 0;
+  }
   .number {
     font-size: 1.6rem;
   }

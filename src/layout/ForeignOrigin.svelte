@@ -32,6 +32,9 @@
       b["n. of streets dedicated to the individual"] -
       a["n. of streets dedicated to the individual"]
   );
+  const foreignNamesToDisplay = foreignNames.filter(
+    (name) => +name["n. of streets dedicated to the individual"] >= 5
+  );
   const maxNamesPerCity = max(cities, (d) => d.names.length);
 
   $: namesListIsInViewport = false;
@@ -57,7 +60,7 @@
         <LeftColumnIntro />
         <BarChart {foreignNames} {namesListIsInViewport} bind:selectedRegion />
         <NamesList
-          {foreignNames}
+          foreignNames={foreignNamesToDisplay}
           bind:namesListIsInViewport
           bind:citiesToDisplay
         />

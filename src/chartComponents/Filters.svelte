@@ -11,8 +11,15 @@
       onSelectFilter("gender", gender);
     }
   };
+  const handleFieldSelection = (field) => {
+    console.log(field);
+    if (selectedFilters.field !== field) {
+      onSelectFilter("field", field);
+    }
+  };
 </script>
 
+<div class="instructions">Filter the street names</div>
 <div class="filters">
   <div class="filter-section gender">
     <button
@@ -31,13 +38,15 @@
     <Button
       ><Chevron
         >{selectedFilters.field !== ""
-          ? selectedFilters.field
+          ? fields.find((field) => field.id === selectedFilters.field).label
           : "Select a field of practice"}</Chevron
       ></Button
     >
     <Dropdown>
       {#each fields as field}
-        <DropdownItem>{field.label}</DropdownItem>
+        <DropdownItem on:click={() => handleFieldSelection(field.id)}
+          >{field.label}</DropdownItem
+        >
       {/each}
     </Dropdown>
   </div>
@@ -60,17 +69,15 @@
 
 <style lang="scss">
   .filters {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
     margin-bottom: 3rem;
+    padding-left: 2px;
     font-size: 1.6rem;
   }
   .filter-section {
     margin-bottom: 15px;
   }
   .filter-section.gender {
-    margin-top: 35px;
+    margin-top: 12px;
   }
   button.filter-women,
   button.filter-men {
