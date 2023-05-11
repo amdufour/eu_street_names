@@ -1,19 +1,10 @@
 <script>
   import { scaleLinear } from "d3-scale";
+  import foreignRegions from "../data/regions.json";
 
   export let foreignNames;
   export let selectedRegion = null;
   export let namesListIsInViewport;
-
-  const foreignRegions = [
-    { id: "Europe and Central Asia (non EU)" },
-    { id: "Middle East and North Africa" },
-    { id: "North America" },
-    { id: "Latin America and Caribbean" },
-    { id: "Sub-Saharan Africa" },
-    { id: "East Asia and Pacific" },
-    { id: "South Asia" },
-  ];
 
   foreignRegions.forEach((region) => {
     region["names"] = foreignNames.filter((name) => name.region === region.id);

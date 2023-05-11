@@ -1,0 +1,40 @@
+.filters button {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  color: $text;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.filter-section > button {
+  padding-top: 3px;
+  padding-bottom: 6px;
+  border: 1px solid $text;
+  border-radius: 5px;
+  text-align: left;
+  line-height: 1.1;
+  svg {
+    position: relative;
+    top: 2px;
+  }
+}
+.filter-section{
+  position: relative;
+  div[role="tooltip"] {
+    position: relative;
+    z-index: 10;
+    left: 0 !important;
+    right: 0 !important;
+    padding: 10px 5px;
+    font-size: 1.4rem;
+    box-shadow: 0 2px 6px 0 rgba($text, 0.2);
+    li {
+      margin: 5px 0;
+      button {
+        text-align: left;
+      }
+    }
+  }
+}

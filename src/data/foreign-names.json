@@ -2389,47 +2389,6 @@
         ]
     },
     {
-        "name": "Elizabeth",
-        "Wikidata ID": "Q235849",
-        "description (from Wikidata)": "Mother of John the Baptist and the wife of Zacharias/Zachary, according to the Gospel of Luke",
-        "occupation (from Wikidata)": "NA",
-        "field of activity": "NA",
-        "Year of birth (from Wikidata)": "-100",
-        "Year of death (from Wikidata)": "100",
-        "gender": "female",
-        "country of citizenship (from Wikidata)": "NA",
-        "latitude of the place of birth": "31.535",
-        "longitude of the place of birth": "35.09861111",
-        "country code of the current country hosting the place of birth": "PS",
-        "current country hosting the place of birth": "Palestine",
-        "NUTS2 code of the current region hosting the place of birth": "NA",
-        "current NUTS2 region hosting the place of birth": "NA",
-        "n. of streets dedicated to the individual": "6",
-        "n. of cities celebrating the individual with one or more streets": "5",
-        "n. of foreign cities celebrating the individual with one or more streets (current country borders)": "5",
-        "list of cities celebrating the individual with one or more streets": "Brussels|Sevilla|Lyon|Paris|Budapest",
-        "citizenship": "Palestine",
-        "region": "Middle East and North Africa",
-        "countries": [
-            {
-                "id": "Belgium",
-                "count": 1
-            },
-            {
-                "id": "Spain",
-                "count": 1
-            },
-            {
-                "id": "France",
-                "count": 2
-            },
-            {
-                "id": "Hungary",
-                "count": 1
-            }
-        ]
-    },
-    {
         "name": "Avicenna",
         "Wikidata ID": "Q8011",
         "description (from Wikidata)": "Persian polymath, physician and philosopher (c.980–1037)",

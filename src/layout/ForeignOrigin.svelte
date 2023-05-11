@@ -27,6 +27,11 @@
       }
     });
   });
+  foreignNames.sort(
+    (a, b) =>
+      b["n. of streets dedicated to the individual"] -
+      a["n. of streets dedicated to the individual"]
+  );
   const maxNamesPerCity = max(cities, (d) => d.names.length);
 
   $: namesListIsInViewport = false;

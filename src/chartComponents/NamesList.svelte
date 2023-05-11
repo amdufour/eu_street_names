@@ -1,15 +1,12 @@
 <script>
   import viewport from "../helper/useViewportAction";
   import cities from "../data/cities.json";
+  import Filters from "./Filters.svelte";
   export let foreignNames;
   export let namesListIsInViewport;
   export let citiesToDisplay;
 
-  $: namesToDisplay = foreignNames.sort(
-    (a, b) =>
-      b["n. of streets dedicated to the individual"] -
-      a["n. of streets dedicated to the individual"]
-  );
+  $: namesToDisplay = foreignNames;
   console.log(foreignNames);
   let currentScroll = 0;
   let isScrollUp = true;
@@ -53,11 +50,26 @@
       }
     }
   };
+
+  let selectedFilters = {
+    gender: "",
+    field: "",
+    region: "",
+  };
+  const filterNames = (filter, selection) => {
+    console.log(filter, selection);
+    selectedFilters.gender = selection;
+    namesToDisplay = foreignNames.filter((name) => name[filter] === selection);
+  };
 </script>
 
 <h3>Most common foreign names</h3>
+<Filters
+  {selectedFilters}
+  onSelectFilter={(gender, selection) => filterNames(gender, selection)}
+/>
 <div class="number">
-  {namesToDisplay.length} name{namesToDisplay.length > 1 ? "s" : ""}
+  ({namesToDisplay.length} name{namesToDisplay.length > 1 ? "s" : ""})
 </div>
 <div class="list-container">
   <ul
@@ -129,6 +141,9 @@
 </div>
 
 <style lang="scss">
+  .number {
+    font-size: 1.6rem;
+  }
   .list-container {
     position: relative;
     max-height: 700px;
@@ -189,6 +204,7 @@
   .name {
     font-family: $fontSecondary;
     font-size: 2rem;
+    line-height: 1.2;
   }
   .name .number {
     margin-left: 6px;

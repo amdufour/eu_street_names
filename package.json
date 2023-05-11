@@ -23,6 +23,8 @@
     "d3-array": "^3.2.3",
     "d3-geo": "^3.1.0",
     "d3-scale": "^4.0.2",
+    "flowbite": "^1.6.5",
+    "flowbite-svelte": "^0.35.1",
     "node-sass": "^8.0.0",
     "svelte-preprocess": "^5.0.3",
     "topojson-client": "^3.1.0"
