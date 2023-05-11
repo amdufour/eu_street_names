@@ -5,7 +5,11 @@
   export let namesListIsInViewport;
   export let citiesToDisplay;
 
-  $: namesToDisplay = foreignNames;
+  $: namesToDisplay = foreignNames.sort(
+    (a, b) =>
+      b["n. of streets dedicated to the individual"] -
+      a["n. of streets dedicated to the individual"]
+  );
   console.log(foreignNames);
   let currentScroll = 0;
   let isScrollUp = true;
