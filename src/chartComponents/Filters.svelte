@@ -96,6 +96,7 @@
 <style lang="scss">
   .filters {
     position: relative;
+    z-index: 10;
     margin-bottom: 3rem;
     padding-left: 2px;
     font-size: 1.6rem;
