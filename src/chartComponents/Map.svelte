@@ -68,6 +68,7 @@
       const relatedCity = citiesInfo.find((c) => c.city === city);
       cities.push({
         id: city,
+        label: relatedCity.cityEN,
         names: [{}, {}],
         latitude: relatedCity.latitude,
         longitude: relatedCity.longitude,
@@ -90,7 +91,7 @@
   };
 
   const handleMouseLeave = () => {
-    tooltipIsVisible = false;
+    // tooltipIsVisible = false;
   };
 </script>
 
@@ -131,26 +132,34 @@
   {#if tooltipIsVisible}
     <div
       class="map-tooltip"
+      class:large={!namesListIsInViewport}
       style="left: {tooltipMeta.x + 10}px; top: {tooltipMeta.y + 10}px;"
       in:fly={{ y: 10, duration: 200, delay: 200 }}
       out:fade
     >
       <div class="city">
-        {tooltipMeta.city}, {tooltipMeta.names.length} street name{tooltipMeta
-          .names.length > 1
-          ? "s"
-          : ""} originating from
-        {selectedRegion.id}
+        {tooltipMeta.city}
       </div>
-      <ul>
-        {#each tooltipMeta.names as name}
-          <li class:female={name.gender === "female"}>
-            <span class="name-label">{name.name}: </span>
-            <span class="name-label">{name["description (from Wikidata)"]}</span
-            >
-          </li>
-        {/each}
-      </ul>
+      {#if !namesListIsInViewport}
+        <div class="subtitle">
+          {tooltipMeta.names.length} street name{tooltipMeta.names.length > 1
+            ? "s"
+            : ""} originating from
+          {selectedRegion.id}
+        </div>
+      {/if}
+      {#if !namesListIsInViewport}
+        <ul>
+          {#each tooltipMeta.names as name}
+            <li class:female={name.gender === "female"}>
+              <span class="name-label">{name.name}: </span>
+              <span class="name-label"
+                >{name["description (from Wikidata)"]}</span
+              >
+            </li>
+          {/each}
+        </ul>
+      {/if}
     </div>
   {/if}
 </div>
@@ -164,31 +173,40 @@
   }
   .map-tooltip {
     position: relative;
-    width: 400px;
     position: absolute;
     z-index: 10;
-    padding: 20px 25px 5px;
+    padding: 20px 25px 15px;
     line-height: 1.2;
     background-color: #fff;
     border: 1px solid $text;
     border-radius: 3px;
     box-shadow: 0 2px 6px 0 rgba($text, 0.2);
-    &:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 60px;
-      background: linear-gradient(
-        0deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 0) 100%
-      );
+    &.large {
+      width: 400px;
+      padding-bottom: 5px;
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 60px;
+        background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
     }
     .city {
       margin-left: -2px;
       font-size: 1.8rem;
+    }
+    .subtitle {
+      margin-top: 12px;
+      font-family: $fontSecondary;
+      font-size: 1.6rem;
+      color: rgba($gray, 0.8);
     }
     ul {
       position: relative;
