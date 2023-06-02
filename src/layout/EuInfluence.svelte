@@ -114,7 +114,7 @@
     };
   };
   const handleMouseLeave = (e, country, name) => {
-    // isTooltipVisible = false;
+    isTooltipVisible = false;
   };
 </script>
 

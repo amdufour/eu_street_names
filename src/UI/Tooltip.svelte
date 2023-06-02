@@ -15,7 +15,6 @@
 
   let screenWidth;
   let screenHeight;
-  $: console.log(y, screenY, screenHeight);
 </script>
 
 <svelte:window bind:innerWidth={screenWidth} bind:innerHeight={screenHeight} />
@@ -40,7 +39,8 @@
     <div class="section description">{citizenship}</div>
     <div class="section description">
       <span class="label"
-        >{cities.length} street{cities.length > 1 ? "s" : ""} celebrate this person:
+        >{cities.length} street{cities.length > 1 ? "s" : ""} celebrate this person
+        in
       </span>
       {#each cities as city, i}
         <span
@@ -59,7 +59,6 @@
     display: flex;
     position: absolute;
     width: 800px;
-    height: 300px;
     background-color: $white;
     border: 1px solid $gray;
     border-radius: 3px;
