@@ -8,6 +8,8 @@
 
   export let data;
   export let euCountries;
+  export let isTooltipVisible;
+  export let tooltipMetadata;
 
   // Prepare data
   const zebraData = [...data];
@@ -42,12 +44,41 @@
   const dataToDisplay = zebraData
     .filter((d) => d.exportsInMoreThanThree.length > 0)
     .slice(0, 10);
+  console.log("dataToDisplay", dataToDisplay);
+  dataToDisplay.forEach((d) => {
+    d.exportsInMoreThanThree.forEach((name) => {
+      name["isHovered"] = false;
+    });
+  });
 
   // Dimensions
   const rectHeight = 25;
 
   // Scales
   const xScale = scaleLinear().domain([0, maxExports]).range([0, 25]);
+
+  // Handle mouse events
+  const handleMouseEnter = (e, country, name) => {
+    isTooltipVisible = true;
+    tooltipMetadata = {
+      x: e.pageX,
+      y: e.pageY,
+      name: name.name,
+      birth_year: name["Year of birth (from Wikidata)"],
+      death_year: name["Year of death (from Wikidata)"],
+      description: name["description (from Wikidata)"],
+      citizenship: country,
+      cities:
+        name[
+          "list of cities celebrating the individual with one or more streets"
+        ].split("|"),
+    };
+    console.log(e);
+    console.log(name);
+  };
+  const handleMouseLeave = (e, country, name) => {
+    isTooltipVisible = false;
+  };
 </script>
 
 <section>
@@ -67,7 +98,12 @@
           </div>
           <div class="street-names">
             {#each d.exportsInMoreThanThree as name}
-              <div class="street-name">
+              <div
+                class="street-name"
+                on:mouseover={(e) => handleMouseEnter(e, d.country, name)}
+                on:focus={(e) => handleMouseEnter(e, d.country, name)}
+                on:mouseleave={(e) => handleMouseLeave(e, d.country, name)}
+              >
                 <span
                   style="
                     width: {xScale(+name[numForeignCities])}px; 

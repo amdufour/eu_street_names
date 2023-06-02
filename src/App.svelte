@@ -6,17 +6,43 @@
   import WomenMenComparison from "./layout/WomenMenComparison.svelte";
   import EuInfluence from "./layout/EuInfluence.svelte";
   import ForeignOrigin from "./layout/ForeignOrigin.svelte";
+  import Tooltip from "./UI/Tooltip.svelte";
+
+  let isTooltipVisible = false;
+  let tooltipMetadata = {
+    x: 0,
+    y: 0,
+    name: "",
+    birth_year: "",
+    death_year: "",
+    description: "",
+    citizenship: "",
+    cities: [],
+  };
 </script>
 
-<Header />
-<main>
-  <div class="container">
-    <!-- <ForeignOrigin /> -->
-    <EuInfluence data={exportsPerEuCountry} {euCountries} />
-    <WomenMenComparison data={exportsPerEuCountry} />
-  </div>
-</main>
-<Footer />
+<div class="page-container">
+  <Header />
+  <main>
+    <div class="container">
+      <!-- <ForeignOrigin /> -->
+      <EuInfluence
+        data={exportsPerEuCountry}
+        {euCountries}
+        bind:isTooltipVisible
+        bind:tooltipMetadata
+      />
+      <WomenMenComparison data={exportsPerEuCountry} />
+    </div>
+  </main>
+  <Footer />
+  {#if isTooltipVisible}
+    <Tooltip {...tooltipMetadata} />
+  {/if}
+</div>
 
 <style lang="scss">
+  .page-container {
+    position: relative;
+  }
 </style>
