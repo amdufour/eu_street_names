@@ -39,9 +39,9 @@
   zebraData.sort(
     (a, b) => b.exportsInMoreThanThree.length - a.exportsInMoreThanThree.length
   );
-  const dataToDisplay = zebraData.filter(
-    (d) => d.exportsInMoreThanThree.length > 0
-  );
+  const dataToDisplay = zebraData
+    .filter((d) => d.exportsInMoreThanThree.length > 0)
+    .slice(0, 10);
 
   // Dimensions
   const rectHeight = 25;

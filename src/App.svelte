@@ -11,7 +11,7 @@
 <Header />
 <main>
   <div class="container">
-    <ForeignOrigin />
+    <!-- <ForeignOrigin /> -->
     <EuInfluence data={exportsPerEuCountry} {euCountries} />
     <WomenMenComparison data={exportsPerEuCountry} />
   </div>
