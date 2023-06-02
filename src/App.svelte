@@ -18,6 +18,7 @@
     description: "",
     citizenship: "",
     cities: [],
+    image_url: "",
   };
 </script>
 

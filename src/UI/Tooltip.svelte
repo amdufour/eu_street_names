@@ -10,6 +10,7 @@
   export let description;
   export let citizenship;
   export let cities;
+  export let image_url;
 </script>
 
 <div
@@ -18,7 +19,7 @@
   out:fade
   style="top: {y + 15}px; left: {x + 10}px"
 >
-  <div class="image-container" />
+  <div class="image-container" style="background-image: url({image_url});" />
   <div class="metadata-container">
     <div class="name">
       {name}{birth_year !== "NA" && death_year !== "NA"
@@ -55,7 +56,9 @@
   .image-container {
     flex-shrink: 0;
     width: 250px;
-    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
   }
   .metadata-container {
     padding: 45px 35px;
