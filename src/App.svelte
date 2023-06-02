@@ -12,6 +12,7 @@
   let tooltipMetadata = {
     x: 0,
     y: 0,
+    screenY: 0,
     name: "",
     birth_year: "",
     death_year: "",

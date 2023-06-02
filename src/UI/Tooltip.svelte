@@ -4,6 +4,7 @@
 
   export let x;
   export let y;
+  export let screenY;
   export let name;
   export let birth_year;
   export let death_year;
@@ -11,13 +12,22 @@
   export let citizenship;
   export let cities;
   export let image_url;
+
+  let screenWidth;
+  let screenHeight;
+  $: console.log(y, screenY, screenHeight);
 </script>
+
+<svelte:window bind:innerWidth={screenWidth} bind:innerHeight={screenHeight} />
 
 <div
   class="tooltip"
   in:fly={{ y: 10, duration: 200, delay: 200 }}
   out:fade
-  style="top: {y + 15}px; left: {x + 10}px"
+  style="
+    top: {screenY <= screenHeight / 2 ? `${y + 15}px` : `${y - 315}px`};
+    left: {x <= screenWidth / 2 ? `${x + 10}px` : 'auto'};
+    right: {x > screenWidth / 2 ? `${screenWidth - x + 10}px` : 'auto'};"
 >
   <div class="image-container" style="background-image: url({image_url});" />
   <div class="metadata-container">
@@ -49,15 +59,17 @@
     display: flex;
     position: absolute;
     width: 800px;
+    height: 300px;
     background-color: $white;
     border: 1px solid $gray;
     border-radius: 3px;
+    overflow: scroll;
   }
   .image-container {
     flex-shrink: 0;
     width: 250px;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center top;
     background-size: cover;
   }
   .metadata-container {

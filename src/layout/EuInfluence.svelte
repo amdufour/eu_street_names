@@ -100,6 +100,7 @@
     tooltipMetadata = {
       x: e.pageX,
       y: e.pageY,
+      screenY: e.clientY,
       name: name.name,
       birth_year: name["Year of birth (from Wikidata)"],
       death_year: name["Year of death (from Wikidata)"],
